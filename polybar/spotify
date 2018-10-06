@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ "$(playerctl status)" == "Playing" ]; then
+  title=`exec playerctl metadata xesam:title`
+  artist=`exec playerctl metadata xesam:artist`
+  #album=`exec playerctl metadata xesam:album`
+  length=`exec playerctl metadata mpris:length`
+  songlength=`exec python ~/.config/polybar/songlength.py $length`
+  echo " $title - $artist - ($songlength)"
+elif [ "$(playerctl status)" == "Paused" ]; then
+   title=`exec playerctl metadata xesam:title`
+   artist=`exec playerctl metadata xesam:artist`
+   #album=`exec playerctl metadata xesam:album`
+   length=`exec playerctl metadata mpris:length`
+   songlength=`exec python ~/.config/polybar/songlength.py $length`
+   echo " $title - $artist - ($songlength)"
+else
+   echo ""
+fi
